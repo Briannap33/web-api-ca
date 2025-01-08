@@ -1,7 +1,7 @@
 import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import express from 'express';
-import {getUpcomingMovies, getMovieGenres, getPopularMovies } from '../tmdb-api';
+import {getUpcomingMovies, getMovieGenres, getPopularMovies, getMoviesByYear } from '../tmdb-api';
   
 const router = express.Router();
 
@@ -34,6 +34,16 @@ router.get('/:id', asyncHandler(async (req, res) => {
         res.status(200).json(movie);
     } else {
         res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
+    }
+}));
+router.get('/tmdb/year/:year', asyncHandler(async (req, res) => {
+    const year = req.params.year;
+
+    try {
+        const moviesByYear = await getMoviesByYear(year);
+        res.status(200).json(moviesByYear.results);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 }));
 router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {

@@ -45,3 +45,18 @@ export const getPopularMovies = async () => {
         throw error;
     }
 };
+export const getMoviesByYear = async (year) => {
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&primary_release_year=${year}`
+        );
+
+        if (!response.ok) {
+            throw new Error((await response.json()).message);
+        }
+
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
