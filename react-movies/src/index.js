@@ -15,6 +15,8 @@ import WatchlistPage from "./pages/watchListPage";
 import ActorPage from "./pages/ActorDetailPage";
 import PopularMoviePage from "./pages/popularMoviePage.js";
 import NowTrendingPage from "./pages/nowTrendingMovies";
+import { AuthProvider } from './contexts/authContext';
+import SignUpForm from "./pages/signUpForm.js";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,11 +30,13 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
+    <AuthProvider>  
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <SiteHeader />
       <MoviesContextProvider>
       <Routes>
+        <Route path="/signup" element={ <SignUpForm /> } />
         <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} /> 
         <Route path="/movies/watchlist" element={<WatchlistPage />} /> 
@@ -50,8 +54,10 @@ const App = () => {
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
+  </AuthProvider>
 );
 };
 
 const rootElement = createRoot( document.getElementById("root") )
 rootElement.render(<App />);
+

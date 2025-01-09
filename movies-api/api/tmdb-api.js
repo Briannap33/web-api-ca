@@ -2,19 +2,22 @@ import fetch from 'node-fetch';
 
 export const getUpcomingMovies = async () => {
     try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
-        );
-
-        if (!response.ok) {
-            throw new Error(response.json().message);
-        }
-
-        return await response.json();
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+      );
+  
+      if (!response.ok) {
+        const errorResponse = await response.json(); // Await response.json() here
+        throw new Error(errorResponse.message || "Something went wrong with TMDB API");
+      }
+  
+      return await response.json(); // If the response is okay, parse the JSON
     } catch (error) {
-        throw error;
+      console.error("Error fetching upcoming movies:", error); // Log the error for debugging
+      throw error; // Rethrow the error to be caught by your backend error handler
     }
-};
+  };
+  
 export const getMovieGenres = async () => {
     try {
         const response = await fetch(

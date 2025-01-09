@@ -4,7 +4,7 @@ import cors from 'cors';
 import usersRouter from './api/users';
 import './db';
 import defaultErrHandler from './errHandler';
-import moviesRouter from './api/movies';   //import movies router
+import moviesRouter from './api/movies'; 
 import authenticate from './authenticate';
 
 dotenv.config();
