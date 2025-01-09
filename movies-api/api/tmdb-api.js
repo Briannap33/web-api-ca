@@ -79,7 +79,7 @@ export const getTopMovies = async () => {
 export const getMoviesBySearch = async (search) => {
     try {
         const response = await fetch(
-            'https://api.themoviedb.org/3/search/movie?api_key=your_api_key&query=inception&language=en-US'
+            `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${encodeURIComponent(search)}&language=en-US`
        );
         if (!response.ok) {
             throw new Error((await response.json()).message);
