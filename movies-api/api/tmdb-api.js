@@ -75,3 +75,18 @@ export const getTopMovies = async () => {
         throw error;
     }
 };
+
+export const getMoviesBySearch = async (search) => {
+    try {
+        const response = await fetch(
+            'https://api.themoviedb.org/3/search/movie?api_key=your_api_key&query=inception&language=en-US'
+       );
+        if (!response.ok) {
+            throw new Error((await response.json()).message);
+        }
+
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
