@@ -3,51 +3,48 @@
 Name: Brianna Power
 
 ## Features.
-
-A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** (or modifications to existing features)
- 
- + Feature 1 
- + Feature 2 
- + Feature 3 
- + etc
+ *postman only*
+ + getMoviesBySearch- name of movie can be imputted to then return movie details http://localhost:8080/api/movies/tmdb/search/The Godfather
+ + getMoviesByYear- when user unputs year, list of movies realeased in that year are returned e.g.http://localhost:8080/api/movies/tmdb/year/2022
+ + getPopularMovies -returns list of popular movies at the time 
+ + getTopMovies- returns list of top rated movies
 
 ## Setup requirements.
-
-[ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
+N/A
 
 ## API Configuration
 
-Describe any configuration that needs to take place before running the API. For example, creating an `.env` file and what variables to put in it. Give an example of how this might be done.
-
-REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
-
+.env files created for both frontend and backend using following:
 ______________________
-NODEENV=development
+*backend*
+NODE_ENV=development
 PORT=8080
 HOST=
-mongoDB=YourMongoURL
-seedDb=true
-secret=YourJWTSecret
+MONGO_DB=YourMongoURL
+TMDB_KEY=--------
+SECRET=YourJWTSecret
+______________________
+______________________
+*frontend*
+REACT_APP_TMDB_KEY=----------
+FAST_REFRESH=-----
 ______________________
 
+
+
 ## API Design
-Give an overview of your web API design, perhaps similar to the following: 
-
-- /api/movies | GET | Gets a list of movies 
-- /api/movies/{movieid} | GET | Gets a single movie 
-- /api/movies/{movieid}/reviews | GET | Get all reviews for movie 
-- /api/movies/{movieid}/reviews | POST | Create a new review for Movie 
-
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
+-/api/movies/upcoming | GET | Fetches a list of upcoming movies from TMDB.
+-/api/movies/popular | GET | Retrieves a list of popular movies from TMDB.
+-/api/movies/top | GET | Fetches a list of top-rated movies from TMDB.
+-/api/movies/{year} | GET | Retrieves movies released in a specific year from TMDB.
+-/api/movies/search | GET | Searches for movies based on a query string.
 
 ## Security and Authentication
 
-Give details of authentication/security implemented on the API (e.g. passport/sessions). Indicate which routes are protected.
+login&signup forms made, not working very well as user can login without having made account if they use the login on the site header, if user clicks register they are locked out of seeing any movie page until they register.
 
 ## Integrating with React App
 
-Describe how you integrated your React app with the API. List the views that use your Web API instead of the TMDB API. Describe any other updates to the React app from Assignment One.
+attempt at integration but could not get it to work, instead it just gives an error message to the user (for upcoming movies and popular movies)
 
-## Independent learning (if relevant)
-
-Briefly explain any non-standard features developed for the app.   
+   
