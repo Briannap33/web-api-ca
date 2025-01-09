@@ -1,3 +1,5 @@
+const BASE_URL = 'http://localhost:8080/api'
+
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -13,35 +15,20 @@ export const getMovies = () => {
       throw error
   });
 };
-export const getUpcomingMovies = () => {
-  return fetch('http://localhost:8080/api/movies/tmdb/upcoming')
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
+export const getUpcomingMovies = async () => {
+  const response = await fetch(`${BASE_URL}/upcoming-movies`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch upcoming movies from the backend');
+  }
+  return response.json();
 };
 
-export const getPopularMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
-  ).then((response) => {
-    if (!response.ok) {
-      return response.json().then((error) => {
-        throw new Error(error.status_message || "Something went wrong");
-      });
-    }
-    return response.json();
-  })
-  .catch((error) => {
-      throw error
-  });
+export const getPopularMovies = async () => {
+  const response = await fetch(`${BASE_URL}/popular-movies`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch popular movies from the backend');
+  }
+  return response.json();
 };
 
 export const getNowTrendingMovies = () => {
